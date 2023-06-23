@@ -142,13 +142,11 @@ JOIN shops
 ON cat_murzik.shops_id = shops.id;
 
 -- Вывести магазины, в которых НЕ продаются коты “Мурзик” и “Zuza”
-SELECT
-	s.*,
-    c.*
-FROM shops s
-LEFT JOIN cats c
-ON c.shops_id = s.id
-WHERE c.`name` = "Murzic" OR c.`name` = "Zuza" IS NULL;
+SELECT s.shopname
+FROM shops AS s
+LEFT JOIN cats AS c
+ON s.id = c.shops_id AND c.name IN ('Murzik', 'Zuza')
+WHERE c.id IS NULL;
 -- Вывести название и цену для всех анализов, которые продавались 5 февраля 2020 и всю следующую неделю.
 -- an_name — название анализа;
 -- an_price — розничная цена анализа;
